@@ -2,98 +2,89 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
+        <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+        <link rel="shortcut icon" type="png" sizes="32x32" href="/favicon.png">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="Cache-Control" content="no-transform" />
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <meta name="author" content="Nick">
+        <title>Api.hellocode.name</title>
+        <meta name="Keywords" content="php,laravel,vue,js,mysql,css,html5" />
+        <meta name="Description" content="php,laravel,vue,js,mysql,css,html5" />
+        <link href="//fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
+            #box {
+                height: 300px;
+                width: 100%;
+                perspective: 1000px;
+            }
+            #banner {
+                height: 300px;
+                width: 480px;
+                margin: 30vh auto;
+                transition: transform 0.1s;
+                box-shadow: 0 0 15px rgba(0,0,0,.35);
+                line-height: 300px;
+                font-size: 50px;
                 font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
+                color: #9caebf;
+                padding-left: 1vw;
+                background-color: #f0f2f5;
             }
-
-            .full-height {
-                height: 100vh;
+            .print {
+                overflow: hidden;
+                animation: typing 3s steps(30);
             }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
+            @keyframes typing {
+                0% {
+                    width: 0;
+                }
+                100% {
+                    width: 100%;
+                }
             }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+        <div id="box">
+            <div id="banner">
+                <p class="print"> Api.hellocode.name✔ </p>
             </div>
         </div>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script>
+            $('#box').on('mousemove', function(e){
+
+                let offset = $('#box').offset()
+
+                let x = e.pageX - offset.left
+                let y = e.pageY - offset.top
+
+                let centerX = $('#box').outerWidth() /2
+                let centerY = $('#box').outerHeight() /2
+
+                let deltaX = x - centerX
+                let deltaY = y - centerY
+
+                let percentX = deltaX / centerX
+                let percentY = deltaY / centerY
+
+                let deg = 10
+
+                $('#banner').css({
+                    transform: 'rotateX('+deg*-percentY + 'deg)'+' rotateY('+deg*percentX+'deg)'
+                })
+            })
+
+            $('#box').on('mouseleave', function(){
+                $('#banner').css({
+                    transform: ''
+                })
+            })
+        </script>
     </body>
 </html>
