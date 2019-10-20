@@ -7,29 +7,40 @@ use Illuminate\Http\Request;
 class ImageController extends Controller
 {
     public $disk;
+    public $prefix;
 
     public function __construct()
     {
         $this->disk = \Storage::disk('qiniu');
+        $this->prefix = '/books/'.date('Y-m-d', time());
     }
 
-    public function upload()
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function upload(Request $request)
     {
-        $fileName = 'b.png';
+        $file = $request->file('img');
+        $fileName = $this->prefix;
         if ($this->disk->has($fileName) === true) {
             $this->disk->delete($fileName);
         }
-        $res = $this->disk->put($fileName, fopen(public_path('favicon.png'), 'r'));
-        dd($res);
+        $res = $this->disk->put($fileName, $file);
+        return response()->json(['code' => 200, 'message' => 'success', 'data' => ['result' => config('filesystems.disks.qiniu.domain').$res]]);
     }
 
-
+    /**
+     * @param $fileName
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy($fileName)
     {
-        if ($this->disk->has($fileName) === true) {
-            $res = $this->disk->delete($fileName);
-            dd($res);
+        $res = false;
+        $file = $this->prefix.'/'.$fileName;
+        if ($this->disk->has($file) === true) {
+            $res = $this->disk->delete($file);
         }
-        echo 'no exists';
+        return response()->json(['code' => 200, 'message' => 'success', 'data' => ['result' => $res]]);
     }
 }
