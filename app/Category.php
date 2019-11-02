@@ -8,4 +8,9 @@ class Category extends Model
 {
     protected $table = 'wechat_categorys';
     public $timestamps = false;
+
+    public function book()
+    {
+        return $this->hasMany(Book::class);
+    }
 }

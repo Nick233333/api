@@ -8,4 +8,5 @@ class Book extends Model
 {
     protected $table = 'wechat_books';
     public $timestamps = false;
+
 }
