@@ -22,6 +22,7 @@ class BookResource extends JsonResource
             'copyright' => $this->copyright,
             'description' => $this->description,
             'note' => $this->note,
+            'category_id' => $this->category_id,
         ];
     }
 }

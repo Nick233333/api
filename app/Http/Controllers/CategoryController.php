@@ -9,10 +9,19 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $data = Category::with(['book' => function($query) {
+        $categorys = Category::with(['book' => function($query) {
             $query->where('is_show', 1);
         }])->select('id', 'name')->orderByDesc('id')->where('is_show', 1)->paginate(30);
 
-        return CategoryResource::collection($data);
+        return CategoryResource::collection($categorys);
+    }
+
+    public function show($id)
+    {
+        $categorys = Category::with(['book' => function($query) {
+            $query->where([['is_show', 1]])->orderByDesc('id');
+        }])->select('id','name')->where([['is_show', 1],['id', $id]])->get();
+
+        return CategoryResource::collection($categorys);
     }
 }
