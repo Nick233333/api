@@ -11,7 +11,7 @@ class CategoryController extends Controller
     {
         $categorys = Category::with(['book' => function($query) {
             $query->where('is_show', 1);
-        }])->select('id', 'name')->orderByDesc('id')->where('is_show', 1)->paginate(30);
+        }])->select('id', 'name')->where('is_show', 1)->paginate(30);
 
         return CategoryResource::collection($categorys);
     }
@@ -19,7 +19,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $categorys = Category::with(['book' => function($query) {
-            $query->where([['is_show', 1]])->orderByDesc('id');
+            $query->where([['is_show', 1]]);
         }])->select('id','name')->where([['is_show', 1],['id', $id]])->get();
 
         return CategoryResource::collection($categorys);

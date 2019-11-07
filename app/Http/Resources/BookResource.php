@@ -18,7 +18,7 @@ class BookResource extends JsonResource
             'id' => $this->id,
             'book_name' => $this->book_name,
             'pictrue' => config('filesystems.disks.qiniu.domain').$this->img,
-            'auth' => $this->auth,
+            'author' => $this->author,
             'copyright' => $this->copyright,
             'description' => $this->description,
             'note' => $this->note,
