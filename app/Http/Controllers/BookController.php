@@ -11,4 +11,9 @@ class BookController extends Controller
         return new BookResource(Book::findOrFail($id));
     }
 
+    public function myLike()
+    {
+        return BookResource::collection(Book::where('is_like', 1)->paginate(10));
+    }
+
 }
