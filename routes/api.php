@@ -8,3 +8,5 @@ Route::get('books/{id}', 'BookController@show');
 Route::get('categorys/index', 'CategoryController@index');
 Route::get('categorys/{id}', 'CategoryController@show');
 
+Route::post('recommends', 'RecommendController@store');
+
