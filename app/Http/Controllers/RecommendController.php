@@ -14,7 +14,6 @@ class RecommendController extends Controller
         $validator = Validator::make($request->all(), [
             'book' => 'bail|required|string',
             'author' => 'bail|required|string',
-            'recommend' => 'bail|required|string',
         ]);
 
         if ($validator->fails()) {
