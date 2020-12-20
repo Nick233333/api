@@ -13,16 +13,16 @@ class Recommend extends Model
 
     public function setBookAttribute($value)
     {
-        $this->attributes['book'] = htmlspecialchars($value, ENT_QUOTES);
+        $this->attributes['book'] = clean($value);
     }
 
     public function setAuthorAttribute($value)
     {
-        $this->attributes['author'] = htmlspecialchars($value, ENT_QUOTES);
+        $this->attributes['author'] = clean($value);
     }
 
     public function setRecommendAttribute($value)
     {
-        $this->attributes['recommend'] = htmlspecialchars($value, ENT_QUOTES);
+        $this->attributes['recommend'] = clean($value);
     }
 }
