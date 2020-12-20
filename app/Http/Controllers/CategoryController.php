@@ -16,11 +16,11 @@ class CategoryController extends Controller
         return CategoryResource::collection($categorys);
     }
 
-    public function show($id)
+    public function show(Category $category)
     {
-        $categorys = Category::with(['book' => function($query) {
+        $categorys = $category::with(['book' => function($query) {
             $query->where([['is_show', 1]]);
-        }])->select('id','name')->where([['is_show', 1],['id', $id]])->get();
+        }])->select('id','name')->where([['is_show', 1],['id', $category->id]])->get();
 
         return CategoryResource::collection($categorys);
     }

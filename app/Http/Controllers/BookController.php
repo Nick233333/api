@@ -7,9 +7,9 @@ use App\Http\Resources\BookResource;
 
 class BookController extends Controller
 {
-    public function show($id)
+    public function show(Book $book)
     {
-        return new BookResource(Book::findOrFail($id));
+        return new BookResource($book);
     }
 
     public function myLike()
