@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -47,5 +48,16 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    protected function invalid($request, ValidationException $exception)
+    {
+        $errors = $exception->errors();
+        $firstError = \reset($errors);
+
+        return response()->json([
+            'message' => $firstError[0] ?? '参数错误',
+            'errors' => $errors,
+        ], $exception->status);
     }
 }
